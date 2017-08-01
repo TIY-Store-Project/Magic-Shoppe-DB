@@ -9,7 +9,7 @@
   "test": {
     "username": "root",
     "password": null,
-    "database": "magic_shop_test",
+    "database": "magic_shop",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
@@ -17,7 +17,7 @@
     "username": "root",
     "password": null,
     "use_env_variable": "DATABASE_URL",
-    "database": "magic_shop_production",
+    "database": "magic_shop",
     "host": "127.0.0.1",
     "dialect": "postgres"
   }
