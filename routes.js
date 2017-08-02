@@ -50,7 +50,7 @@ const Order = require('./models/order');
 Router.get('/products', function(req, res) {
   console.log('GET /products');
   Product.findAll().then(products => {
-    res.json(products)
+    res.json({products})
   })
 });
 //
