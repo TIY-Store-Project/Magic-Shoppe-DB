@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js"
   },
   "author": "",
   "license": "ISC",
@@ -12,7 +12,5 @@
     "express": "^4.15.3",
     "pg": "7.0.2",
     "sequelize": "^4.4.2",
-    "sequelize-cli": "^2.7.0",
-    "sequelize-heroku": "^1.0.0"
   }
 }
