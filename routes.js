@@ -51,7 +51,7 @@ Router.get('/products', function(req, res) {
   console.log('GET /products');
   Product.findAll().then(products => {
     res.json(products)
-  }
+  })
 });
 //
 // // get a single product by id, and it's reviews
