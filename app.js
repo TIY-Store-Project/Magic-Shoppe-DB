@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
-
+const User = require('./models/user');
+const Product = require('./models/product');
+const routes = require('./routes');
 
 var pg = require('pg');
 

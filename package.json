@@ -10,7 +10,9 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.15.3",
+    "express-router": "0.0.1",
+    "passport": "^0.3.2",
     "pg": "7.0.2",
-    "sequelize": "^4.4.2",
+    "sequelize": "^4.4.2"
   }
 }
