@@ -52,12 +52,13 @@ const Order = models.order;
 // get all products in an array, plus an average of the reviews for each
 Router.get('/products', function(req, res) {
   console.log('GET /products');
-  models.product.findAll().then(products => {
+  Product.findAll().then(products => {
+    console.log(products.image);
     res.json(products)
   })
 });
-//
-// // get a single product by id, and it's reviews
+
+// get a single product by id, and it's reviews
 // Router.get('/products/:id', function(req, res) {
 //   console.log('GET /products/' + req.params.id);
 //   Product.findById(req.params.id, function(err, product) {
