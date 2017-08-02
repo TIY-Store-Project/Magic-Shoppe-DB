@@ -4,12 +4,12 @@ const express = require('express');
 const passport = require('passport');
 const Router = express.Router();
 const models = require('./models');
-var Sequelize = require('sequelize');
+const Sequelize = require('sequelize');
 
 
-const Product = models.product
-// const Review = require('./models/review')(sequelize, DataTypes);
-// const Order = require('./models/order')(sequelize, DataTypes);
+const Product = models.product;
+const Review = models.review;
+const Order = models.order;
 
 
 // // create a new product
