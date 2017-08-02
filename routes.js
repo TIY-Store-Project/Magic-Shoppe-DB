@@ -3,10 +3,13 @@
 const express = require('express');
 const passport = require('passport');
 const Router = express.Router();
+const models = require('./models');
+var Sequelize = require('sequelize');
 
-const Product = require('./models/product');
-const Review = require('./models/review');
-const Order = require('./models/order');
+
+const Product = models.product
+// const Review = require('./models/review')(sequelize, DataTypes);
+// const Order = require('./models/order')(sequelize, DataTypes);
 
 
 // // create a new product
@@ -49,8 +52,8 @@ const Order = require('./models/order');
 // get all products in an array, plus an average of the reviews for each
 Router.get('/products', function(req, res) {
   console.log('GET /products');
-  Product.findAll().then(products => {
-    res.json({products})
+  models.product.findAll().then(products => {
+    res.json(products)
   })
 });
 //

@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const Product = require('./models/product');
 const routes = require('./routes');
+// const models = require('./models.js');
 
 // var pg = require('pg');
 //
@@ -20,6 +21,8 @@ const routes = require('./routes');
 app.get('/', function (req, res) {
   res.send('Hello World!');
 });
+
+app.use(routes);
 
 app.set('port', (process.env.PORT || 5000));
 app.listen(app.get('port'), function() {
