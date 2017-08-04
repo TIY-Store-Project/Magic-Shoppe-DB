@@ -5,12 +5,13 @@ const passport = require('passport');
 const Router = express.Router();
 const models = require('./models');
 const Sequelize = require('sequelize');
-
 const Product = models.product;
 const Review = models.review;
 const Order = models.order;
 
 
+
+// #CREATE
 // create a new product
 // Router.post('/newproduct', function(req, res) {
 //   console.log('POST /newproduct');
@@ -30,24 +31,46 @@ const Order = models.order;
 //   });
 // });
 
-// // create a new review
-// Router.post('/newreview', function(req, res) {
-//   console.log('POST /newreview');
-//   const newReview = new Review({
-//     name: req.body.name,
-//     content: req.body.content,
-//     rating: req.body.rating,
-//     productID: req.body.productID
-//     //console.log  this^^^ when you build out the reviews table
-//   });
-//   if (req.body.review) {
-//     newReview.review = req.body.review;
-//   }
-//   newReview.save(function(err, newReview) {
-//     if (err) return console.error(err);
-//     res.json(newReview);
-//   });
-// });
+////////////////////////////
+
+Router.post('/newproduct', function(req, res) {
+  var newProduct = Product.build({
+    name: req.body.name,
+    price: req.body.price,
+    category: req.body.category,
+    description: req.body.description,
+    image: req.body.image
+  });
+  console.log(newProduct);
+  newProduct.save(function(err, newProduct) {
+    if (err) return console.error(err);
+    res.json(newProduct);
+  })
+});
+/////////////////////////////
+
+
+
+// create a new review
+Router.post('/newreview', function(req, res) {
+  console.log('POST /newreview');
+  const newReview = new Review({
+    name: req.body.name,
+    content: req.body.content,
+    rating: req.body.rating,
+    productID: req.body.productID
+    //console.log  this^^^ when you build out the reviews table
+  });
+  if (req.body.review) {
+    newReview.review = req.body.review;
+  }
+  newReview.save(function(err, newReview) {
+    if (err) return console.error(err);
+    res.json(newReview);
+  });
+});
+
+
 
 // #READ
 // get all products in an array

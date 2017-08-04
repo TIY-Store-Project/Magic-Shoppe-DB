@@ -25,7 +25,7 @@ app.get('/', function (req, res) {
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
-    extended: false
+    extended: true
   })
 );
 app.use(routes);
