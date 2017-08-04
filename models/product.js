@@ -6,12 +6,10 @@ module.exports = function(sequelize, DataTypes) {
     category: DataTypes.STRING,
     description: DataTypes.STRING,
     image: DataTypes.STRING
-  }, {
-    classMethods: {
-      associate: function(models) {
-        // associations can be defined here
-      }
-    }
-  });
+  }, {});
+
+  product.associate = function(models) {
+    product.hasMany(models.review, {as: 'reviews', foreignKey: 'productID'})
+  }
   return product;
 };
