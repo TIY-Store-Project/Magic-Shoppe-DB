@@ -41,6 +41,9 @@ Router.post('/newreview', function(req, res) {
   newReview.save().then(function(newReview) {
     // if (err) return console.error(err);
     res.json(newReview);
+  }).catch(error => {
+    console.log(error);
+    res.status(500).json
   });
 });
 
