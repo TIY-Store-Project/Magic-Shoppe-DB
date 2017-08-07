@@ -22,7 +22,7 @@ Router.post('/newproduct', function(req, res) {
     image: req.body.image
   });
   console.log(newProduct);
-  newProduct.save(function(err, newProduct) {
+  newProduct.save().then(function(err, newProduct) {
     if (err) return console.error(err);
     res.json(newProduct);
   })
@@ -38,7 +38,7 @@ Router.post('/newreview', function(req, res) {
     rating: req.body.rating,
     productID: req.body.productID
   });
-  newReview.save(function(err, newReview) {
+  newReview.save().then(function(err, newReview) {
     if (err) return console.error(err);
     res.json(newReview);
   });
