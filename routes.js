@@ -38,8 +38,8 @@ Router.post('/newreview', function(req, res) {
     rating: req.body.rating,
     productID: req.body.productID
   });
-  newReview.save().then(function(err, newReview) {
-    if (err) return console.error(err);
+  newReview.save().then(function(newReview) {
+    // if (err) return console.error(err);
     res.json(newReview);
   });
 });
