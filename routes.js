@@ -13,28 +13,8 @@ const Order = models.order;
 
 // #CREATE
 // create a new product
-// Router.post('/newproduct', function(req, res) {
-//   console.log('POST /newproduct');
-//   const newProduct = new Product({
-//     name: req.body.name,
-//     price: req.body.price,
-//     category: req.body.category,
-//     description: req.body.description,
-//     image: req.body.image
-//   });
-//   if (req.body.image) {
-//     newProduct.image = req.body.image;
-//   }
-//   newProduct.save(function(err, newProduct) {
-//     if (err) return console.error(err);
-//     res.json(newProduct);
-//   });
-// });
-
-////////////////////////////
-
 Router.post('/newproduct', function(req, res) {
-  var newProduct = Product.build({
+  let newProduct = Product.build({
     name: req.body.name,
     price: req.body.price,
     category: req.body.category,
@@ -47,23 +27,17 @@ Router.post('/newproduct', function(req, res) {
     res.json(newProduct);
   })
 });
-/////////////////////////////
 
 
 
 // create a new review
 Router.post('/newreview', function(req, res) {
-  console.log('POST /newreview');
-  const newReview = new Review({
+  let newReview = Review.build({
     name: req.body.name,
     content: req.body.content,
     rating: req.body.rating,
     productID: req.body.productID
-    //console.log  this^^^ when you build out the reviews table
   });
-  if (req.body.review) {
-    newReview.review = req.body.review;
-  }
   newReview.save(function(err, newReview) {
     if (err) return console.error(err);
     res.json(newReview);

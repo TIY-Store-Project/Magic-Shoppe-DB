@@ -11,5 +11,3 @@ module.exports = function(sequelize, DataTypes) {
   }
   return order;
 };
-
-//orders

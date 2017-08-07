@@ -3,6 +3,32 @@ const app = express();
 const Product = require('./models/product');
 const routes = require('./routes');
 const bodyParser = require('body-parser');
+
+
+const allowCrossDomain = function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+
+    // intercept OPTIONS method
+    if ('OPTIONS' == req.method) {
+      res.send(200);
+    }
+    else {
+      next();
+    }
+};
+
+
+
+app.use(allowCrossDomain);
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+    extended: true
+  })
+);
+app.use(routes);
+
 // const models = require('./models.js');
 
 // var pg = require('pg');
@@ -19,16 +45,13 @@ const bodyParser = require('body-parser');
 //     });
 // });
 
+// app.use(allowCrossDomain);
+
 app.get('/', function (req, res) {
   res.send('Hello World!');
 });
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-    extended: true
-  })
-);
-app.use(routes);
+
 
 app.set('port', (process.env.PORT || 5000));
 app.listen(app.get('port'), function() {
