@@ -11,7 +11,7 @@ const Order = models.order;
 
 
 
-// #CREATE
+// CREATE
 // create a new product
 Router.post('/newproduct', function(req, res) {
   let newProduct = Product.build({
@@ -21,14 +21,15 @@ Router.post('/newproduct', function(req, res) {
     description: req.body.description,
     image: req.body.image
   });
-  console.log(newProduct);
-  newProduct.save().then(function(err, newProduct) {
-    if (err) return console.error(err);
-    res.json(newProduct);
+  newProduct.save().then(function(newProduct) {
+    res.json(newProduct)
+  }).catch(error => {
+    console.log(error);
+    res.status(500).json({
+      message: 'ERROR! WARNING! ABORT! ABORT!'
+    })
   })
 });
-
-
 
 // create a new review
 Router.post('/newreview', function(req, res) {
@@ -39,17 +40,34 @@ Router.post('/newreview', function(req, res) {
     productID: req.body.productID
   });
   newReview.save().then(function(newReview) {
-    // if (err) return console.error(err);
-    res.json(newReview);
+    res.json(newReview)
   }).catch(error => {
     console.log(error);
-    res.status(500).json
+    res.status(500).json({
+      message: 'ERROR! WARNING! ABORT! ABORT!'
+    })
+  });
+});
+
+// create a new order
+Router.post('/neworder', function(req, res) {
+  let newOrder = Order.build({
+    quantity: req.body.quantity,
+    productID: req.body.productID
+  });
+  newOrder.save().then(function(newOrder) {
+    res.json(newOrder)
+  }).catch(error => {
+    console.log(error);
+    res.status(500).json({
+      message: 'ERROR! WARNING! ABORT! ABORT!'
+    })
   });
 });
 
 
 
-// #READ
+// READ
 // get all products in an array
 Router.get('/products', function(req, res) {
   console.log('GET /products');
@@ -88,36 +106,41 @@ Router.get('/reviews/:id', function(req, res) {
   });
 });
 
+// get all orders in a array
+Router.get('/orders', function(req, res) {
+  Order.findAll().then(orders => {
+    res.json(orders)
+  });
+});
+
+// get a single order by id
+Router.get('/orders/:id', function(req, res) {
+  Order.findById(req.params.id, function(err, order) {
+    if (err) return console.error(err);
+    res.json(order);
+  });
+});
+
+
+
+// UPDATE
+// change quantity of an order by id
+Router.put('updateorder/:id', function(req, res) {
+  Order.findById(req.params.id, function(err, order) {
+    if (err) return console.error(err);
+    order.quantity = req.body.quantity || order.quantity;
+    order.productID = req.body.productId || order.productId;
+    if (order.order || req.body.order) {
+      order.order = req.body.order || order.order;
+    }
+    order.save(function(err, order) {
+      if (err) return console.error(err);
+      res.json(order);
+    });
+  });
+});
 
 
 
 
-//
-// Router.delete('/product/:id', function(req, res) {
-//   console.log('DELETE /product/', req.params.id);
-//   Product.findByIdAndRemove(req.params.id, function(err, product) {
-//     if (err) return console.error(err);
-//     let msg = {
-//       message: 'delete successful!',
-//       product: product
-//     };
-//     res.json(msg);
-//   });
-// });
-//
-// Router.delete('/review/:id', function(req, res) {
-//   console.log('DELETE /review/' + req.params.id);
-//   Review.findByIdAndRemove(req.params.id, function(err, review) {
-//     if (err) return console.error(err);
-//     let msg = {
-//       message: 'delete successful!',
-//       review: review
-//     };
-//     res.json(msg);
-//   });
-// });
-//
-// // this should be moved once we define which endpoints need auth.
-// Router.use(passport.authenticate('basic', { session: false }));
-//
 module.exports = Router;
