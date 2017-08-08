@@ -129,7 +129,7 @@ Router.put('updateorder/:id', function(req, res) {
   Order.findById(req.params.id, function(err, order) {
     if (err) return console.error(err);
     order.quantity = req.body.quantity || order.quantity;
-    order.productID = req.body.productId || order.productId;
+    order.productID = req.body.productID || order.productID;
     if (order.order || req.body.order) {
       order.order = req.body.order || order.order;
     }
@@ -139,7 +139,6 @@ Router.put('updateorder/:id', function(req, res) {
     });
   });
 });
-
 
 
 
